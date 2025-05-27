@@ -71,14 +71,15 @@ const Navbar = () => {
           </Link>
         </div>
         
-        {/* Enhanced Theme Toggle Button with animations */}
-        <motion.button 
-          className="theme-toggle-container"
-          onClick={toggleTheme}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-        >
+        <div className="buttons-container">
+          {/* Enhanced Theme Toggle Button with animations */}
+          <motion.button 
+            className="theme-toggle-container"
+            onClick={toggleTheme}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+          >
           <motion.div 
             className="theme-toggle-wrapper"
             animate={{ rotate: theme === 'light' ? 0 : 180 }}

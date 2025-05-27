@@ -613,6 +613,12 @@ body {
   align-items: center;
 }
 
+.buttons-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .logo {
   font-size: 1.8rem;
   font-weight: 700;
@@ -632,9 +638,15 @@ body {
 
 .nav-link {
   text-decoration: none;
-  color: var(--text-color);
-  font-weight: 500;
+  color: #000; /* Black text for light mode */
+  font-weight: 600; /* Increased font weight for better visibility */
   transition: color 0.3s ease;
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+[data-theme="dark"] .nav-link {
+  color: #fff; /* Explicit color for dark mode */
 }
 
 .nav-link:hover {
@@ -644,13 +656,14 @@ body {
 /* Mobile Navigation Toggle */
 .mobile-nav-toggle {
   display: none;
-  background: transparent;
+  background: none;
   border: none;
   cursor: pointer;
   z-index: 1001;
   width: 40px;
   height: 40px;
   position: relative;
+  margin-left: auto; /* Push to the right side */
 }
 
 /* Hamburger Icon */
@@ -966,12 +979,16 @@ h1 {
   font-size: 1.1rem;
   line-height: 1.8;
   margin-bottom: 2.5rem;
-  color: #555;
+  color: var(--text-color);
 }
 
 .skills-section,
 .education-section {
   margin-bottom: 3rem;
+  padding: 1rem;
+  border-radius: 12px;
+  background-color: var(--card-bg);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
 .skills-section h3,
@@ -981,9 +998,25 @@ h1 {
   font-weight: 700;
   margin-bottom: 1.5rem;
   color: var(--primary-color);
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.5rem;
 }
 
-.project.skills-grid {
+.skills-section h3::after,
+.education-section h3::after,
+.research-publications h3::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 50px;
+  height: 3px;
+  background: var(--gradient-1);
+  border-radius: 3px;
+}
+
+.skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 1.5rem;
@@ -1497,9 +1530,7 @@ h1 {
 
 /* Enhanced Theme Toggle Button with animations */
 .theme-toggle-container {
-  position: fixed;
-  top: 20px;
-  right: 20px;
+  position: relative; /* Change to relative positioning */
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -1511,6 +1542,7 @@ h1 {
   background: transparent;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
+  margin-left: 20px; /* Add margin to separate from nav links */
 }
 
 .theme-toggle-container:hover {
