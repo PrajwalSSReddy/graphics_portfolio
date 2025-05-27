@@ -110,11 +110,8 @@ const AboutSection = () => {
         key={index}
         whileHover={{ y: -10, boxShadow: '0 15px 35px rgba(0, 123, 255, 0.2)' }}
         onClick={() => setActive(isActive ? null : index)}
-        initial={{ opacity: 0, y: 20 }}
-        animate={controls}
-        variants={{
-          visible: { opacity: 1, y: 0, transition: { delay: 0.1 * index } },
-        }}
+        initial={{ opacity: 1, y: 0 }}
+        animate={{ opacity: 1, y: 0 }}
       >
         <div className="skill-icon">
           <div className="icon-inner">
@@ -144,11 +141,8 @@ const AboutSection = () => {
         key={index}
         onMouseEnter={() => setActive(index)}
         onMouseLeave={() => setActive(null)}
-        initial={{ opacity: 0, x: -20 }}
-        animate={controls}
-        variants={{
-          visible: { opacity: 1, x: 0, transition: { delay: 0.1 * index } },
-        }}
+        initial={{ opacity: 1, x: 0 }}
+        animate={{ opacity: 1, x: 0 }}
       >
         <motion.div
           className="timeline-dot"
@@ -268,6 +262,7 @@ const AboutSection = () => {
     { year: '2017', institution: 'Deccan Vidya Samsthe', details: 'Percentage: 86.88%' },
     { year: '2017-2019', institution: 'Sri Byraveshwara Rural and Composite PU College', details: 'Science (Percentage: 86.88%)' },
     { year: '2019-2023', institution: 'AMC Engineering College', details: 'Computer Science (CGPA: 8.02)' },
+    { year: '2023-Present', institution: 'University Visvesvaraya College of Engineering', details: 'M.Tech in Web Technologies (CGPA: 9.02)' },
   ];
 
   return (
@@ -305,11 +300,8 @@ const AboutSection = () => {
           </motion.p>
           <motion.div
             className="skills-section"
-            initial={{ opacity: 0 }}
-            animate={controls}
-            variants={{
-              visible: { opacity: 1, transition: { delay: 0.4 } },
-            }}
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
           >
             <h3 className="section-subtitle">Skills</h3>
             <div className="skills-grid">
@@ -326,11 +318,8 @@ const AboutSection = () => {
           </motion.div>
           <motion.div 
             className="education-section"
-            initial={{ opacity: 0 }}
-            animate={controls}
-            variants={{
-              visible: { opacity: 1, transition: { delay: 0.5 } },
-            }}
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
           >
             <h3 className="section-subtitle">Education</h3>
             <div className="timeline">
