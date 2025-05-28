@@ -1,0 +1,805 @@
+/* Project Popup Styles - Common for all projects with popups */
+.project-popup-container {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Business 360 specific styles */
+.business360-container {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Grocery System specific styles */
+.grocery-system-container {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Movie Recommender specific styles */
+.movie-recommender-container {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* NLP Text Analysis specific styles */
+.nlp-analysis-container {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Excel Sales Analytics specific styles */
+.excel-analytics-container {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Cricket Analysis specific styles */
+.cricket-analysis-container {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Hide Business 360 popup by default */
+.business360-popup {
+  position: fixed; /* Use fixed positioning to follow cursor */
+  width: 280px; /* Slightly larger width */
+  height: auto;
+  z-index: 1000;
+  background: white;
+  border-radius: 12px; /* Increased radius */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); /* Deeper shadow */
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none; /* Don't interfere with mouse events */
+  transform: translate(20px, -50%) scale(0.6); /* More dramatic initial scale */
+  transition: 
+    opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), /* Slower transition */
+    transform 0.7s cubic-bezier(0.18, 1.25, 0.4, 1.32), /* More elastic bounce */
+    visibility 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.6s ease; /* Shadow transition */
+  visibility: hidden;
+  transform-origin: left center;
+  will-change: transform, opacity, box-shadow;
+  backdrop-filter: blur(3px); /* Add subtle blur effect */
+}
+
+/* Show the popup when hovering over the container */
+.business360-container:hover .business360-popup {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(20px, -50%) scale(1); /* Full size when visible */
+  box-shadow: 0 20px 50px rgba(0, 123, 255, 0.4), 0 5px 15px rgba(0, 0, 0, 0.4); /* Glowing effect */
+}
+
+/* Extra animation for when the popup appears */
+.business360-container:hover .business360-popup::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 12px;
+  animation: popupPulse 1.2s cubic-bezier(0.34, 1.56, 0.64, 1); /* Slower animation */
+  pointer-events: none;
+}
+
+@keyframes popupPulse {
+  0% { box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.8); transform: scale(0.95); opacity: 0.7; }
+  50% { box-shadow: 0 0 0 10px rgba(0, 123, 255, 0); transform: scale(1.08); opacity: 1; }
+  100% { box-shadow: 0 0 0 0 rgba(0, 123, 255, 0); transform: scale(1); opacity: 1; }
+}
+
+/* Image styling with animation */
+.popup-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  max-height: 180px; /* Taller image */
+  background-color: white;
+  transform: translateY(30px) scale(0.9); /* More dramatic starting position */
+  opacity: 0;
+  transition: 
+    transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), /* Slower animation */
+    opacity 0.8s ease,
+    filter 0.8s ease;
+  filter: saturate(0.8) contrast(0.9); /* Start with lower saturation */
+}
+
+.business360-container:hover .popup-image {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  transition-delay: 0.2s; /* More delay before starting */
+  filter: saturate(1.1) contrast(1.1); /* Enhance colors when visible */
+}
+
+/* Caption styling with animation */
+.popup-caption {
+  padding: 12px; /* More padding */
+  background: linear-gradient(90deg, rgba(0, 123, 255, 0.9), rgba(0, 247, 255, 0.9)); /* Gradient background */
+  color: white;
+  font-size: 13px; /* Slightly larger font */
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); /* Text shadow for depth */
+  letter-spacing: 0.5px; /* Letter spacing for style */
+  transform: translateY(30px); /* More dramatic starting position */
+  opacity: 0;
+  transition: 
+    transform 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275), /* Slower animation */
+    opacity 0.9s ease,
+    background 0.9s ease;
+}
+
+.business360-container:hover .popup-caption {
+  transform: translateY(0);
+  opacity: 1;
+  transition-delay: 0.4s; /* More delay for staggered effect */
+}
+
+/* Add more elaborate effects when popup is visible */
+.business360-container:hover .popup-image {
+  animation: shimmer 3s infinite alternate ease-in-out; /* Slower animation */
+}
+
+@keyframes shimmer {
+  0% { filter: brightness(1) saturate(1); }
+  50% { filter: brightness(1.12) saturate(1.15); }
+  100% { filter: brightness(1.08) saturate(1.1); }
+}
+
+/* Add a border reveal effect */
+.business360-popup::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #007bff, #00f7ff);
+  transition: width 1.2s ease-in-out; /* Slow transition */
+}
+
+.business360-container:hover .business360-popup::after {
+  width: 100%;
+  transition-delay: 0.3s;
+}
+
+/* Grocery System Popup Styles */
+.grocery-popup {
+  position: fixed; /* Use fixed positioning to follow cursor */
+  width: 280px; /* Slightly larger width */
+  height: auto;
+  z-index: 1000;
+  background: white;
+  border-radius: 12px; /* Increased radius */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); /* Deeper shadow */
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none; /* Don't interfere with mouse events */
+  transform: translate(20px, -50%) scale(0.6); /* More dramatic initial scale */
+  transition: 
+    opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), /* Slower transition */
+    transform 0.7s cubic-bezier(0.18, 1.25, 0.4, 1.32), /* More elastic bounce */
+    visibility 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.6s ease; /* Shadow transition */
+  visibility: hidden;
+  transform-origin: left center;
+  will-change: transform, opacity, box-shadow;
+  backdrop-filter: blur(3px); /* Add subtle blur effect */
+}
+
+/* Show the popup when hovering over the container */
+.grocery-system-container:hover .grocery-popup {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(20px, -50%) scale(1); /* Full size when visible */
+  box-shadow: 0 20px 50px rgba(0, 139, 69, 0.4), 0 5px 15px rgba(0, 0, 0, 0.4); /* Green glow */
+}
+
+/* Extra animation for grocery popup */
+.grocery-system-container:hover .grocery-popup::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 12px;
+  animation: groceryPulse 1.2s cubic-bezier(0.34, 1.56, 0.64, 1); /* Slower animation */
+  pointer-events: none;
+}
+
+@keyframes groceryPulse {
+  0% { box-shadow: 0 0 0 0 rgba(0, 139, 69, 0.8); transform: scale(0.95); opacity: 0.7; }
+  50% { box-shadow: 0 0 0 10px rgba(0, 139, 69, 0); transform: scale(1.08); opacity: 1; }
+  100% { box-shadow: 0 0 0 0 rgba(0, 139, 69, 0); transform: scale(1); opacity: 1; }
+}
+
+/* Grocery popup image styling */
+.grocery-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  max-height: 180px;
+  background-color: white;
+  transform: translateY(30px) scale(0.9);
+  opacity: 0;
+  transition: 
+    transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    opacity 0.8s ease,
+    filter 0.8s ease;
+  filter: saturate(0.8) contrast(0.9);
+}
+
+.grocery-system-container:hover .grocery-image {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  transition-delay: 0.2s;
+  filter: saturate(1.1) contrast(1.1);
+}
+
+/* Grocery caption styling */
+.grocery-caption {
+  padding: 12px;
+  background: linear-gradient(90deg, rgba(0, 139, 69, 0.9), rgba(144, 238, 144, 0.9)); /* Green gradient */
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.5px;
+  transform: translateY(30px);
+  opacity: 0;
+  transition: 
+    transform 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    opacity 0.9s ease,
+    background 0.9s ease;
+}
+
+.grocery-system-container:hover .grocery-caption {
+  transform: translateY(0);
+  opacity: 1;
+  transition-delay: 0.4s;
+}
+
+/* Grocery image shimmer effect */
+.grocery-system-container:hover .grocery-image {
+  animation: groceryShimmer 3s infinite alternate ease-in-out;
+}
+
+@keyframes groceryShimmer {
+  0% { filter: brightness(1) saturate(1); }
+  50% { filter: brightness(1.12) saturate(1.15); }
+  100% { filter: brightness(1.08) saturate(1.1); }
+}
+
+/* Grocery border reveal effect */
+.grocery-popup::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #008b45, #90ee90);
+  transition: width 1.2s ease-in-out;
+}
+
+.grocery-system-container:hover .grocery-popup::after {
+  width: 100%;
+  transition-delay: 0.3s;
+}
+
+/* Movie Recommender System Popup Styles */
+.movie-popup {
+  position: fixed; /* Use fixed positioning to follow cursor */
+  width: 280px; /* Slightly larger width */
+  height: auto;
+  z-index: 1000;
+  background: #121212; /* Dark background for movie theme */
+  border-radius: 12px; /* Increased radius */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8); /* Deeper shadow */
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none; /* Don't interfere with mouse events */
+  transform: translate(20px, -50%) scale(0.6); /* More dramatic initial scale */
+  transition: 
+    opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), /* Slower transition */
+    transform 0.7s cubic-bezier(0.18, 1.25, 0.4, 1.32), /* More elastic bounce */
+    visibility 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.6s ease; /* Shadow transition */
+  visibility: hidden;
+  transform-origin: left center;
+  will-change: transform, opacity, box-shadow;
+  backdrop-filter: blur(3px); /* Add subtle blur effect */
+}
+
+/* Show the popup when hovering over the container */
+.movie-recommender-container:hover .movie-popup {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(20px, -50%) scale(1); /* Full size when visible */
+  box-shadow: 0 20px 50px rgba(221, 0, 0, 0.5), 0 5px 15px rgba(0, 0, 0, 0.6); /* Red glow for movies */
+}
+
+/* Extra animation for movie popup */
+.movie-recommender-container:hover .movie-popup::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 12px;
+  animation: moviePulse 1.2s cubic-bezier(0.34, 1.56, 0.64, 1); /* Slower animation */
+  pointer-events: none;
+}
+
+@keyframes moviePulse {
+  0% { box-shadow: 0 0 0 0 rgba(221, 0, 0, 0.8); transform: scale(0.95); opacity: 0.7; }
+  50% { box-shadow: 0 0 0 10px rgba(221, 0, 0, 0); transform: scale(1.08); opacity: 1; }
+  100% { box-shadow: 0 0 0 0 rgba(221, 0, 0, 0); transform: scale(1); opacity: 1; }
+}
+
+/* Movie popup image styling */
+.movie-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  max-height: 180px;
+  background-color: #121212;
+  transform: translateY(30px) scale(0.9);
+  opacity: 0;
+  transition: 
+    transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    opacity 0.8s ease,
+    filter 0.8s ease;
+  filter: saturate(0.8) contrast(0.9);
+}
+
+.movie-recommender-container:hover .movie-image {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  transition-delay: 0.2s;
+  filter: saturate(1.1) contrast(1.1);
+}
+
+/* Movie caption styling */
+.movie-caption {
+  padding: 12px;
+  background: linear-gradient(90deg, rgba(180, 0, 0, 0.9), rgba(90, 0, 0, 0.9)); /* Red gradient */
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.5px;
+  transform: translateY(30px);
+  opacity: 0;
+  transition: 
+    transform 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    opacity 0.9s ease,
+    background 0.9s ease;
+}
+
+.movie-recommender-container:hover .movie-caption {
+  transform: translateY(0);
+  opacity: 1;
+  transition-delay: 0.4s;
+}
+
+/* Movie image shimmer effect */
+.movie-recommender-container:hover .movie-image {
+  animation: movieShimmer 3s infinite alternate ease-in-out;
+}
+
+@keyframes movieShimmer {
+  0% { filter: brightness(1) saturate(1); }
+  50% { filter: brightness(1.12) saturate(1.15); }
+  100% { filter: brightness(1.08) saturate(1.1); }
+}
+
+/* Movie border reveal effect */
+.movie-popup::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #dd0000, #ff5555);
+  transition: width 1.2s ease-in-out;
+}
+
+.movie-recommender-container:hover .movie-popup::after {
+  width: 100%;
+  transition-delay: 0.3s;
+}
+
+/* NLP Text Analysis Popup Styles */
+.nlp-popup {
+  position: fixed; /* Use fixed positioning to follow cursor */
+  width: 280px; /* Slightly larger width */
+  height: auto;
+  z-index: 1000;
+  background: white; /* Clean background for data visualization */
+  border-radius: 12px; /* Increased radius */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5); /* Deeper shadow */
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none; /* Don't interfere with mouse events */
+  transform: translate(20px, -50%) scale(0.6); /* More dramatic initial scale */
+  transition: 
+    opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), /* Slower transition */
+    transform 0.7s cubic-bezier(0.18, 1.25, 0.4, 1.32), /* More elastic bounce */
+    visibility 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.6s ease; /* Shadow transition */
+  visibility: hidden;
+  transform-origin: left center;
+  will-change: transform, opacity, box-shadow;
+  backdrop-filter: blur(3px); /* Add subtle blur effect */
+}
+
+/* Show the popup when hovering over the container */
+.nlp-analysis-container:hover .nlp-popup {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(20px, -50%) scale(1); /* Full size when visible */
+  box-shadow: 0 20px 50px rgba(255, 77, 79, 0.3), 0 5px 15px rgba(0, 126, 255, 0.3), 0 5px 15px rgba(255, 216, 20, 0.3); /* Tricolor glow */
+}
+
+/* Extra animation for NLP popup */
+.nlp-analysis-container:hover .nlp-popup::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 12px;
+  animation: nlpPulse 1.2s cubic-bezier(0.34, 1.56, 0.64, 1); /* Slower animation */
+  pointer-events: none;
+}
+
+@keyframes nlpPulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 77, 79, 0.6); transform: scale(0.95); opacity: 0.7; }
+  33% { box-shadow: 0 0 0 5px rgba(0, 126, 255, 0.0); transform: scale(1.02); opacity: 0.8; }
+  66% { box-shadow: 0 0 0 8px rgba(255, 216, 20, 0.0); transform: scale(1.05); opacity: 0.9; }
+  100% { box-shadow: 0 0 0 0 rgba(255, 77, 79, 0); transform: scale(1); opacity: 1; }
+}
+
+/* NLP popup image styling */
+.nlp-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  max-height: 180px;
+  background-color: white;
+  transform: translateY(30px) scale(0.9);
+  opacity: 0;
+  transition: 
+    transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    opacity 0.8s ease,
+    filter 0.8s ease;
+  filter: saturate(0.8) contrast(0.9);
+}
+
+.nlp-analysis-container:hover .nlp-image {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  transition-delay: 0.2s;
+  filter: saturate(1.2) contrast(1.1);
+}
+
+/* NLP caption styling - tricolor gradient to match sentiment analysis */
+.nlp-caption {
+  padding: 12px;
+  background: linear-gradient(90deg, rgba(255, 77, 79, 0.9), rgba(0, 126, 255, 0.9), rgba(255, 216, 20, 0.9)); /* Sentiment colors */
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.5px;
+  transform: translateY(30px);
+  opacity: 0;
+  transition: 
+    transform 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    opacity 0.9s ease,
+    background 0.9s ease;
+}
+
+.nlp-analysis-container:hover .nlp-caption {
+  transform: translateY(0);
+  opacity: 1;
+  transition-delay: 0.4s;
+}
+
+/* NLP image shimmer effect */
+.nlp-analysis-container:hover .nlp-image {
+  animation: nlpShimmer 3s infinite alternate ease-in-out;
+}
+
+@keyframes nlpShimmer {
+  0% { filter: brightness(1) saturate(1); }
+  33% { filter: brightness(1.08) saturate(1.1) hue-rotate(0deg); }
+  66% { filter: brightness(1.12) saturate(1.15) hue-rotate(10deg); }
+  100% { filter: brightness(1.1) saturate(1.2) hue-rotate(-10deg); }
+}
+
+/* NLP border reveal effect - tricolor */
+.nlp-popup::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #ff4d4f, #007eff, #ffd814);
+  transition: width 1.2s ease-in-out;
+}
+
+.nlp-analysis-container:hover .nlp-popup::after {
+  width: 100%;
+  transition-delay: 0.3s;
+}
+
+/* Excel Sales Analytics Popup Styles */
+.excel-popup {
+  position: fixed; /* Use fixed positioning to follow cursor */
+  width: 280px; /* Slightly larger width */
+  height: auto;
+  z-index: 1000;
+  background: white; /* Clean background for data visualization */
+  border-radius: 12px; /* Increased radius */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5); /* Deeper shadow */
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none; /* Don't interfere with mouse events */
+  transform: translate(20px, -50%) scale(0.6); /* More dramatic initial scale */
+  transition: 
+    opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), /* Slower transition */
+    transform 0.7s cubic-bezier(0.18, 1.25, 0.4, 1.32), /* More elastic bounce */
+    visibility 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.6s ease; /* Shadow transition */
+  visibility: hidden;
+  transform-origin: left center;
+  will-change: transform, opacity, box-shadow;
+  backdrop-filter: blur(3px); /* Add subtle blur effect */
+}
+
+/* Show the popup when hovering over the container */
+.excel-analytics-container:hover .excel-popup {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(20px, -50%) scale(1); /* Full size when visible */
+  box-shadow: 0 20px 50px rgba(33, 115, 70, 0.4), 0 5px 15px rgba(0, 0, 0, 0.3); /* Excel green glow */
+}
+
+/* Extra animation for Excel popup */
+.excel-analytics-container:hover .excel-popup::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 12px;
+  animation: excelPulse 1.2s cubic-bezier(0.34, 1.56, 0.64, 1); /* Slower animation */
+  pointer-events: none;
+}
+
+@keyframes excelPulse {
+  0% { box-shadow: 0 0 0 0 rgba(33, 115, 70, 0.6); transform: scale(0.95); opacity: 0.7; }
+  50% { box-shadow: 0 0 0 10px rgba(33, 115, 70, 0.0); transform: scale(1.08); opacity: 1; }
+  100% { box-shadow: 0 0 0 0 rgba(33, 115, 70, 0.0); transform: scale(1); opacity: 1; }
+}
+
+/* Excel popup image styling */
+.excel-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  max-height: 180px;
+  background-color: white;
+  transform: translateY(30px) scale(0.9);
+  opacity: 0;
+  transition: 
+    transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    opacity 0.8s ease,
+    filter 0.8s ease;
+  filter: saturate(0.8) contrast(0.9);
+}
+
+.excel-analytics-container:hover .excel-image {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  transition-delay: 0.2s;
+  filter: saturate(1.2) contrast(1.1);
+}
+
+/* Excel caption styling */
+.excel-caption {
+  padding: 12px;
+  background: linear-gradient(90deg, rgba(33, 115, 70, 0.9), rgba(33, 115, 70, 0.7)); /* Excel green */
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.5px;
+  transform: translateY(30px);
+  opacity: 0;
+  transition: 
+    transform 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    opacity 0.9s ease,
+    background 0.9s ease;
+}
+
+.excel-analytics-container:hover .excel-caption {
+  transform: translateY(0);
+  opacity: 1;
+  transition-delay: 0.4s;
+}
+
+/* Excel image shimmer effect */
+.excel-analytics-container:hover .excel-image {
+  animation: excelShimmer 3s infinite alternate ease-in-out;
+}
+
+@keyframes excelShimmer {
+  0% { filter: brightness(1) saturate(1); }
+  50% { filter: brightness(1.12) saturate(1.15); }
+  100% { filter: brightness(1.08) saturate(1.1); }
+}
+
+/* Excel border reveal effect */
+.excel-popup::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #217346, #83c686); /* Excel green gradient */
+  transition: width 1.2s ease-in-out;
+}
+
+.excel-analytics-container:hover .excel-popup::after {
+  width: 100%;
+  transition-delay: 0.3s;
+}
+
+/* Cricket Analysis Popup Styles */
+.cricket-popup {
+  position: fixed; /* Use fixed positioning to follow cursor */
+  width: 280px; /* Slightly larger width */
+  height: auto;
+  z-index: 1000;
+  background: white; /* Clean background for data visualization */
+  border-radius: 12px; /* Increased radius */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5); /* Deeper shadow */
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none; /* Don't interfere with mouse events */
+  transform: translate(20px, -50%) scale(0.6); /* More dramatic initial scale */
+  transition: 
+    opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), /* Slower transition */
+    transform 0.7s cubic-bezier(0.18, 1.25, 0.4, 1.32), /* More elastic bounce */
+    visibility 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.6s ease; /* Shadow transition */
+  visibility: hidden;
+  transform-origin: left center;
+  will-change: transform, opacity, box-shadow;
+  backdrop-filter: blur(3px); /* Add subtle blur effect */
+}
+
+/* Show the popup when hovering over the container */
+.cricket-analysis-container:hover .cricket-popup {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(20px, -50%) scale(1); /* Full size when visible */
+  box-shadow: 0 20px 50px rgba(0, 51, 160, 0.4), 0 5px 15px rgba(0, 0, 0, 0.3); /* Cricket blue glow */
+}
+
+/* Extra animation for Cricket popup */
+.cricket-analysis-container:hover .cricket-popup::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 12px;
+  animation: cricketPulse 1.2s cubic-bezier(0.34, 1.56, 0.64, 1); /* Slower animation */
+  pointer-events: none;
+}
+
+@keyframes cricketPulse {
+  0% { box-shadow: 0 0 0 0 rgba(0, 51, 160, 0.6); transform: scale(0.95); opacity: 0.7; }
+  50% { box-shadow: 0 0 0 10px rgba(0, 51, 160, 0.0); transform: scale(1.08); opacity: 1; }
+  100% { box-shadow: 0 0 0 0 rgba(0, 51, 160, 0.0); transform: scale(1); opacity: 1; }
+}
+
+/* Cricket popup image styling */
+.cricket-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  max-height: 180px;
+  background-color: white;
+  transform: translateY(30px) scale(0.9);
+  opacity: 0;
+  transition: 
+    transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    opacity 0.8s ease,
+    filter 0.8s ease;
+  filter: saturate(0.8) contrast(0.9);
+}
+
+.cricket-analysis-container:hover .cricket-image {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  transition-delay: 0.2s;
+  filter: saturate(1.2) contrast(1.1);
+}
+
+/* Cricket caption styling */
+.cricket-caption {
+  padding: 12px;
+  background: linear-gradient(90deg, rgba(0, 51, 160, 0.9), rgba(25, 118, 210, 0.9)); /* Cricket blue */
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.5px;
+  transform: translateY(30px);
+  opacity: 0;
+  transition: 
+    transform 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    opacity 0.9s ease,
+    background 0.9s ease;
+}
+
+.cricket-analysis-container:hover .cricket-caption {
+  transform: translateY(0);
+  opacity: 1;
+  transition-delay: 0.4s;
+}
+
+/* Cricket image shimmer effect */
+.cricket-analysis-container:hover .cricket-image {
+  animation: cricketShimmer 3s infinite alternate ease-in-out;
+}
+
+@keyframes cricketShimmer {
+  0% { filter: brightness(1) saturate(1); }
+  50% { filter: brightness(1.12) saturate(1.15); }
+  100% { filter: brightness(1.08) saturate(1.1); }
+}
+
+/* Cricket border reveal effect */
+.cricket-popup::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #0033a0, #1976d2); /* Cricket blue gradient */
+  transition: width 1.2s ease-in-out;
+}
+
+.cricket-analysis-container:hover .cricket-popup::after {
+  width: 100%;
+  transition-delay: 0.3s;
+}

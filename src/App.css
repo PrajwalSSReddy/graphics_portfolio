@@ -103,31 +103,60 @@ body {
   text-decoration: none;
   color: var(--text-color);
   font-weight: 500;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
   position: relative;
-  padding: 0.5rem 0;
-  margin: 0 1rem;
-  overflow: hidden;
+  margin: 0 0.8rem;
+  overflow: visible;
 }
 
-.nav-link::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: 0;
-  left: -100%;
-  background: var(--gradient-1);
-  transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
-  transform: translateX(0);
-}
-
-.nav-link:hover::before {
-  transform: translateX(100%);
+.nav-link-wrapper {
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  position: relative;
+  transition: all 0.3s ease;
 }
 
 .nav-link:hover {
+  color: var(--accent-color);
+}
+
+.nav-link.active {
   color: var(--primary-color);
+}
+
+.active-text {
+  color: var(--accent-color);
+  font-weight: 600;
+  display: inline-block;
+  position: relative;
+}
+
+[data-theme="dark"] .active-text {
+  color: var(--accent-color);
+}
+
+[data-theme="dark"] .nav-link {
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .nav-link:hover {
+  color: var(--accent-color);
+}
+
+.active-indicator {
+  position: absolute;
+  height: 3px;
+  bottom: -8px;
+  left: 0;
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+}
+
+/* Pulse animation for active nav items */
+@keyframes pulse-nav {
+  0% { box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.4); }
+  70% { box-shadow: 0 0 0 6px rgba(0, 123, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 123, 255, 0); }
 }
 
 /* Header styles */
@@ -587,22 +616,45 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
-  padding: 1rem 2rem;
+  height: 80px;
   display: flex;
-  justify-content: center;
+  align-items: center;
+  padding: 0 2rem;
+  background-color: rgba(248, 249, 250, 0.8);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  background-color: rgba(248, 249, 250, 0.8);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  transition: all 0.3s ease;
+  z-index: 1000;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.5s cubic-bezier(0.215, 0.610, 0.355, 1.000);
 }
 
 [data-theme="dark"] .navbar {
   background-color: rgba(14, 14, 14, 0.8);
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.navbar .logo span {
+  background: var(--text-color);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-size: 200% auto;
+  animation: textShine 3s ease-in-out infinite alternate;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .navbar .logo span {
+  background: linear-gradient(90deg, var(--text-color), var(--accent-color));
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+@keyframes textShine {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
 }
 
 .nav-container {
@@ -738,18 +790,45 @@ body {
 }
 
 .mobile-nav-link {
-  color: var(--text-color);
-  text-decoration: none;
-  font-size: 1.5rem;
-  font-weight: 600;
   display: block;
+  color: white;
+  text-decoration: none;
   padding: 0.5rem 0;
-  border-bottom: 1px solid var(--border-color);
+  margin: 0.7rem 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 1px;
   transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.nav-link:hover {
-  color: #007bff;
+.mobile-nav-link-wrapper {
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.mobile-nav-link.active .mobile-nav-link-wrapper {
+  padding-left: 1.5rem;
+}
+
+.mobile-nav-link.active {
+  color: var(--accent-color);
+}
+
+.mobile-active-indicator {
+  color: var(--accent-color);
+  margin-left: 8px;
+  font-size: 10px;
+  animation: pulse-glow 2s infinite alternate;
+}
+
+@keyframes pulse-glow {
+  0% { text-shadow: 0 0 5px rgba(0, 247, 255, 0.5); }
+  100% { text-shadow: 0 0 15px rgba(0, 247, 255, 0.9), 0 0 20px rgba(0, 123, 255, 0.4); }
 }
 
 .header {

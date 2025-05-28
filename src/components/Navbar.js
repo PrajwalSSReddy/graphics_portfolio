@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Link, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence, useAnimation } from 'framer-motion';
 
 const Navbar = () => {
+  const location = useLocation();
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState('/');
   
   // Apply theme on initial load and when theme changes
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
   }, [theme]);
+
+  // Update active tab based on current location
+  useEffect(() => {
+    setActiveTab(location.pathname);
+  }, [location]);
   
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
@@ -33,42 +40,30 @@ const Navbar = () => {
         
         {/* Desktop Navigation */}
         <div className="nav-links">
-          <Link to="/" className="nav-link">
-            <motion.span 
-              whileHover={{ scale: 1.1, color: "var(--accent-color)" }}
-              whileTap={{ scale: 0.9 }}
-              transition={{ duration: 0.3 }}
-            >
-              Home
-            </motion.span>
-          </Link>
-          <Link to="/about" className="nav-link">
-            <motion.span 
-              whileHover={{ scale: 1.1, color: "var(--accent-color)" }}
-              whileTap={{ scale: 0.9 }}
-              transition={{ duration: 0.3 }}
-            >
-              About
-            </motion.span>
-          </Link>
-          <Link to="/work" className="nav-link">
-            <motion.span 
-              whileHover={{ scale: 1.1, color: "var(--accent-color)" }}
-              whileTap={{ scale: 0.9 }}
-              transition={{ duration: 0.3 }}
-            >
-              Work
-            </motion.span>
-          </Link>
-          <Link to="/contact" className="nav-link">
-            <motion.span 
-              whileHover={{ scale: 1.1, color: "var(--accent-color)" }}
-              whileTap={{ scale: 0.9 }}
-              transition={{ duration: 0.3 }}
-            >
-              Contact
-            </motion.span>
-          </Link>
+          <NavLink 
+            to="/" 
+            label="Home" 
+            isActive={activeTab === '/'} 
+            theme={theme} 
+          />
+          <NavLink 
+            to="/about" 
+            label="About" 
+            isActive={activeTab === '/about'} 
+            theme={theme} 
+          />
+          <NavLink 
+            to="/work" 
+            label="Work" 
+            isActive={activeTab === '/work'} 
+            theme={theme} 
+          />
+          <NavLink 
+            to="/contact" 
+            label="Contact" 
+            isActive={activeTab === '/contact'} 
+            theme={theme} 
+          />
         </div>
         
         <div className="buttons-container">
@@ -236,43 +231,192 @@ const Navbar = () => {
             transition={{ type: 'tween', duration: 0.3 }}
           >
             <div className="mobile-nav-links">
-              <Link to="/" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
-                <motion.span 
-                  whileHover={{ x: 5 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Home
-                </motion.span>
-              </Link>
-              <Link to="/about" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
-                <motion.span 
-                  whileHover={{ x: 5 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  About
-                </motion.span>
-              </Link>
-              <Link to="/work" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
-                <motion.span 
-                  whileHover={{ x: 5 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Work
-                </motion.span>
-              </Link>
-              <Link to="/contact" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
-                <motion.span 
-                  whileHover={{ x: 5 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Contact
-                </motion.span>
-              </Link>
+              <MobileNavLink 
+                to="/" 
+                label="Home" 
+                isActive={activeTab === '/'} 
+                theme={theme} 
+                onClick={() => setIsMobileMenuOpen(false)} 
+              />
+              <MobileNavLink 
+                to="/about" 
+                label="About" 
+                isActive={activeTab === '/about'} 
+                theme={theme} 
+                onClick={() => setIsMobileMenuOpen(false)} 
+              />
+              <MobileNavLink 
+                to="/work" 
+                label="Work" 
+                isActive={activeTab === '/work'} 
+                theme={theme} 
+                onClick={() => setIsMobileMenuOpen(false)} 
+              />
+              <MobileNavLink 
+                to="/contact" 
+                label="Contact" 
+                isActive={activeTab === '/contact'} 
+                theme={theme} 
+                onClick={() => setIsMobileMenuOpen(false)} 
+              />
             </div>
           </motion.div>
         )}
       </AnimatePresence>
     </nav>
+  );
+};
+
+// NavLink Component for desktop navigation with enhanced animations
+const NavLink = ({ to, label, isActive, theme }) => {
+  const controls = useAnimation();
+  
+  useEffect(() => {
+    if (isActive) {
+      controls.start({
+        scale: [1, 1.05, 1],
+        transition: { repeat: Infinity, repeatType: "reverse", duration: 2 }
+      });
+    } else {
+      controls.stop();
+      controls.set({ scale: 1 });
+    }
+  }, [isActive, controls]);
+
+  // Determine colors based on theme and active state
+  const getTextColor = () => {
+    if (isActive) {
+      return theme === 'light' ? 'var(--accent-color)' : 'var(--accent-color)';
+    }
+    return 'var(--text-color)';
+  };
+
+  const getHoverColor = () => theme === 'light' ? 'var(--accent-color)' : 'var(--accent-color)';
+  
+  const getBackgroundColor = () => {
+    if (isActive) {
+      return theme === 'light' ? 'rgba(0, 123, 255, 0.1)' : 'rgba(0, 247, 255, 0.1)';
+    }
+    return 'transparent';
+  };
+
+  const getGradient = () => {
+    return theme === 'light' 
+      ? 'linear-gradient(90deg, #007bff, #00f7ff)' 
+      : 'linear-gradient(90deg, #00f7ff, #007bff)';
+  };
+
+  const getShadow = () => {
+    return theme === 'light' 
+      ? '0 0 8px rgba(0, 247, 255, 0.5)' 
+      : '0 0 10px rgba(0, 247, 255, 0.7)';
+  };
+
+  return (
+    <Link to={to} className={`nav-link ${isActive ? 'active' : ''}`}>
+      <motion.div 
+        className="nav-link-wrapper"
+        initial={false}
+        animate={{
+          backgroundColor: getBackgroundColor(),
+          color: getTextColor()
+        }}
+        transition={{ duration: 0.5 }}
+      >
+        <motion.span 
+          whileHover={{ 
+            scale: 1.1, 
+            color: getHoverColor(),
+            textShadow: getShadow()
+          }}
+          whileTap={{ scale: 0.9 }}
+          transition={{
+            type: "spring",
+            stiffness: 300,
+            damping: 15,
+            duration: 0.4
+          }}
+          animate={controls}
+          className={isActive ? 'active-text' : ''}
+          style={{ color: getTextColor() }}
+        >
+          {label}
+          {isActive && (
+            <motion.div 
+              className="active-indicator"
+              initial={{ width: 0, opacity: 0 }}
+              animate={{ 
+                width: '100%', 
+                opacity: 1,
+                background: getGradient(),
+                boxShadow: theme === 'dark' ? '0 0 8px rgba(0, 247, 255, 0.6)' : ''
+              }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+            />
+          )}
+        </motion.span>
+      </motion.div>
+    </Link>
+  );
+};
+
+// MobileNavLink Component for mobile navigation with enhanced animations
+const MobileNavLink = ({ to, label, isActive, theme, onClick }) => {
+  // Determine colors based on theme and active state
+  const getTextColor = () => {
+    if (isActive) {
+      return theme === 'light' ? 'var(--accent-color)' : 'var(--accent-color)';
+    }
+    return theme === 'light' ? 'var(--text-color)' : 'white';
+  };
+
+  const getHoverColor = () => theme === 'light' ? 'var(--accent-color)' : 'var(--accent-color)';
+  
+  const getBackgroundColor = () => {
+    if (isActive) {
+      return theme === 'light' ? 'rgba(0, 123, 255, 0.1)' : 'rgba(0, 247, 255, 0.1)';
+    }
+    return 'transparent';
+  };
+
+  return (
+    <Link to={to} className={`mobile-nav-link ${isActive ? 'active' : ''}`} onClick={onClick}>
+      <motion.div
+        className="mobile-nav-link-wrapper"
+        initial={false}
+        animate={{
+          backgroundColor: getBackgroundColor(),
+          color: getTextColor(),
+          x: isActive ? 10 : 0
+        }}
+        transition={{ duration: 0.3, type: "spring", stiffness: 300, damping: 20 }}
+      >
+        <motion.span 
+          whileHover={{ x: 5, color: getHoverColor() }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ duration: 0.2 }}
+          className={isActive ? 'active-text' : ''}
+          style={{ color: getTextColor() }}
+        >
+          {label}
+          {isActive && (
+            <motion.span 
+              className="mobile-active-indicator"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ 
+                opacity: 1, 
+                y: 0,
+                color: theme === 'dark' ? 'var(--accent-color)' : 'var(--accent-color)',
+                textShadow: theme === 'dark' ? '0 0 8px rgba(0, 247, 255, 0.7)' : '0 0 5px rgba(0, 247, 255, 0.5)'
+              }}
+              transition={{ duration: 0.3 }}
+            >
+              ●
+            </motion.span>
+          )}
+        </motion.span>
+      </motion.div>
+    </Link>
   );
 };
 
